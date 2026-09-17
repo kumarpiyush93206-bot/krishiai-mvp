@@ -8,11 +8,22 @@ from PIL import Image
 
 app = FastAPI(title='KrishiAI AI Service', version='0.1.0-demo')
 
+
+class PredictionResult(dict):
+    """Stable prediction schema used across the stack."""
+
+
 class AIModel(Protocol):
+    adapter: str
+
     def predict(self, image: Image.Image, crop: str) -> dict: ...
 
+
 class DemoModel:
-    """DEVELOPMENT/DEMO heuristic only; replace with a trained model before production."""
+    """Development-only fallback. Replace with a trained PyTorch/TensorFlow model behind the same interface."""
+
+    adapter = 'DEMO'
+
     def predict(self, image: Image.Image, crop: str) -> dict:
         pixels = np.asarray(image, dtype=np.float32)
         gray = cv2.cvtColor(pixels.astype(np.uint8), cv2.COLOR_RGB2GRAY)
@@ -37,7 +48,46 @@ class DemoModel:
             label, raw_score = 'Healthy', disease_scores['Healthy']
         confidence = min(0.78, round(0.52 + abs(raw_score - 0.28) * 0.35, 2))
         top = [{'label': name, 'confidence': round(min(0.78, max(0.05, score / max(ranked[0][1], 1) * confidence)), 2)} for name, score in ranked[:3]]
-        return {'prediction': label, 'confidence': confidence, 'top_predictions': top, 'visual_signals': signals, 'model_type': 'DEMO_OPENCV_HEURISTIC'}
+        return {
+            'prediction': label,
+            'confidence': confidence,
+            'top_predictions': top,
+            'visual_signals': signals,
+            'model_type': 'DEMO_OPENCV_HEURISTIC',
+            'adapter': 'DEMO',
+        }
+
+
+def as_prediction_contract(raw: dict) -> dict:
+    """Normalize all predictions to the stable API contract used across services."""
+    prediction = raw.get('prediction') or raw.get('label') or 'Healthy'
+    confidence = float(raw.get('confidence', 0.5) or 0.5)
+    top_predictions = raw.get('top_predictions') or [
+        {'label': prediction, 'confidence': confidence},
+        {'label': 'Healthy', 'confidence': max(0.05, 1 - confidence)}
+    ]
+    normalized = []
+    for item in top_predictions:
+        normalized.append({
+            'label': item.get('label') or prediction,
+            'confidence': float(item.get('confidence', confidence) or confidence),
+        })
+    payload = {
+        'prediction': prediction,
+        'confidence': round(min(max(confidence, 0.0), 1.0), 4),
+        'top_predictions': normalized,
+        'visual_signals': raw.get('visual_signals') or {},
+        'quality': raw.get('quality') or {'acceptable': True},
+        'model_type': raw.get('model_type') or 'MODEL_ADAPTER',
+        'adapter': raw.get('adapter') or ('DEMO' if 'DEMO' in (raw.get('model_type') or '').upper() else 'PRODUCTION'),
+    }
+    if not payload['top_predictions']:
+        payload['top_predictions'] = [
+            {'label': prediction, 'confidence': payload['confidence']},
+            {'label': 'Healthy', 'confidence': max(0.05, 1 - payload['confidence'])},
+        ]
+    return payload
+
 
 model: AIModel = DemoModel()
 
@@ -74,6 +124,6 @@ async def predict(crop: str = Form(...), image: UploadFile = File(...)):
         pil_image = Image.open(BytesIO(raw)).convert('RGB')
     except Exception as exc:
         raise HTTPException(status_code=422, detail='Please upload a clearer crop image.') from exc
-    result = model.predict(pil_image, crop)
+    result = as_prediction_contract(model.predict(pil_image, crop))
     result['quality'] = quality
     return result

@@ -33,11 +33,29 @@ const fetchJson = async (path, options = {}) => {
     ...(token ? { Authorization: `Bearer ${token}` } : {}),
     ...options.headers,
   };
-  const response = await fetch(`${API}${path}`, { ...options, headers });
-  const data = await response.json();
-  if (!response.ok)
-    throw new Error(data.message || data.detail || "Something went wrong");
-  return data;
+
+  try {
+    const response = await fetch(`${API}${path}`, { ...options, headers });
+    const contentType = response.headers.get("content-type") || "";
+    const data = contentType.includes("application/json")
+      ? await response.json()
+      : await response.text();
+
+    if (!response.ok) {
+      throw new Error(
+        typeof data === "string"
+          ? data
+          : data.message || data.detail || "Something went wrong",
+      );
+    }
+
+    return data;
+  } catch (error) {
+    if (error instanceof TypeError) {
+      throw new Error("KrishiAI backend is unavailable. Start the backend service first.");
+    }
+    throw error;
+  }
 };
 
 function App() {
@@ -370,6 +388,80 @@ function FarmerDashboard({ reports, fields, setPage, setSelected }) {
           alert
         />
       </div>
+      {latest && (
+        <section className="insight-section">
+          <div className="section-intro">
+            <div>
+              <p className="eyebrow">LATEST FIELD CHECK</p>
+              <h2>{latest.crop} health snapshot</h2>
+            </div>
+            <button
+              className="text-button"
+              onClick={() => {
+                setSelected(latest);
+                setPage("advisory");
+              }}
+            >
+              Open full report <ArrowRight size={15} />
+            </button>
+          </div>
+          <div className="insight-grid">
+            <InsightCard
+              icon={Activity}
+              label="AI result"
+              value={latest.prediction.prediction}
+              detail={latest.prediction.model_type?.includes("DEMO") ? "DEMO model signal" : "AI model signal"}
+              onClick={() => {
+                setSelected(latest);
+                setPage("advisory");
+              }}
+            />
+            <InsightCard
+              icon={Activity}
+              label="Confidence"
+              value={`${Math.round(latest.prediction.confidence * 100)}%`}
+              detail="How certain the AI is"
+              tone="lime"
+            />
+            <InsightCard
+              icon={Sun}
+              label="Weather"
+              value={latest.weather?.available ? `${latest.weather.temperature}°C` : "Unavailable"}
+              detail={latest.weather?.available ? `${latest.weather.humidity}% humidity` : "Check report details"}
+              tone="sky"
+            />
+            <InsightCard
+              icon={CloudRain}
+              label="Risk level"
+              value={latest.risk.level}
+              detail={latest.risk.reasons[0]}
+              tone={latest.risk.level === "HIGH" ? "red" : "amber"}
+            />
+            <InsightCard
+              icon={Leaf}
+              label="IPM advisory"
+              value="Ready"
+              detail="Practical crop-care guidance"
+              tone="green"
+              onClick={() => {
+                setSelected(latest);
+                setPage("advisory");
+              }}
+            />
+            <InsightCard
+              icon={ShieldCheck}
+              label="Expert validation"
+              value={latest.status === "validated" ? "Validated" : "Pending"}
+              detail={latest.status === "validated" ? "Reviewed by an expert" : "Review recommended"}
+              tone={latest.status === "validated" ? "green" : "amber"}
+              onClick={() => {
+                setSelected(latest);
+                setPage("advisory");
+              }}
+            />
+          </div>
+        </section>
+      )}
       <div className="section-row">
         <div className="panel wide">
           <div className="panel-head">
@@ -418,6 +510,20 @@ function FarmerDashboard({ reports, fields, setPage, setSelected }) {
       </div>
     </div>
   );
+}
+function InsightCard({ icon: Icon, label, value, detail, tone = "green", onClick }) {
+  const content = (
+    <>
+      <span className={`insight-icon insight-${tone}`}><Icon size={18} /></span>
+      <span className="insight-copy">
+        <span className="eyebrow">{label}</span>
+        <strong>{value}</strong>
+        <small>{detail}</small>
+      </span>
+      {onClick && <ArrowRight className="insight-arrow" size={16} />}
+    </>
+  );
+  return onClick ? <button className="insight-card" onClick={onClick}>{content}</button> : <div className="insight-card">{content}</div>;
 }
 function Stat({ label, value, icon: Icon, alert }) {
   return (
@@ -685,6 +791,8 @@ function ReportDetail({ report: initial, onError }) {
   const [report, setReport] = useState(initial);
   const [note, setNote] = useState("");
   const [ipm, setIpm] = useState(null);
+  const visualSignals = report.prediction.visual_signals || {};
+  const signalPercent = (value) => Math.round((Number.isFinite(Number(value)) ? Number(value) : 0) * 100);
   useEffect(() => {
     fetchJson(`/reports/${report.id}`)
       .then(({ report: savedReport, ipm: guidance }) =>
@@ -770,9 +878,9 @@ function ReportDetail({ report: initial, onError }) {
             <p className="stage-note"><strong>Farmer-selected stage:</strong> {report.stage}</p>
             {report.prediction.visual_signals && (
               <div className="visual-signals">
-                <span>Leaf area {Math.round(report.prediction.visual_signals.leaf_area * 100)}%</span>
-                <span>Brown/orange {Math.round(report.prediction.visual_signals.brown_orange * 100)}%</span>
-                <span>Yellowing {Math.round(report.prediction.visual_signals.yellowing * 100)}%</span>
+                <span>Leaf area {signalPercent(visualSignals.leaf_area)}%</span>
+                <span>Brown/orange {signalPercent(visualSignals.brown_orange)}%</span>
+                <span>Yellowing {signalPercent(visualSignals.yellowing)}%</span>
               </div>
             )}
           </div>

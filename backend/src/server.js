@@ -90,9 +90,47 @@ async function getWeather(lat, lng) {
     return { available: true, provider: 'OpenWeather', temperature: current?.main?.temp, humidity: current?.main?.humidity, precipitation: (current?.rain?.['3h'] || 0), forecast: data.list?.slice(0, 4).map(item => ({ time: item.dt_txt, temperature: item.main.temp, rain: item.rain?.['3h'] || 0 })) || [] };
   } catch { return { available: false, message: 'Weather unavailable' }; }
 }
+function normalizePrediction(raw = {}, fallbackType = 'PRODUCTION') {
+  const prediction = raw.prediction || raw.label || 'Healthy';
+  const confidence = Number(raw.confidence ?? 0.5);
+  const rawSignals = raw.visual_signals || {};
+  const visualSignals = {
+    leaf_area: Number.isFinite(Number(rawSignals.leaf_area)) ? Number(rawSignals.leaf_area) : 0,
+    brown_orange: Number.isFinite(Number(rawSignals.brown_orange)) ? Number(rawSignals.brown_orange) : 0,
+    yellowing: Number.isFinite(Number(rawSignals.yellowing)) ? Number(rawSignals.yellowing) : 0,
+    ...rawSignals,
+  };
+  const topPredictions = Array.isArray(raw.top_predictions) && raw.top_predictions.length
+    ? raw.top_predictions.map(item => ({ label: item.label || prediction, confidence: Number(item.confidence ?? confidence) }))
+    : [
+        { label: prediction, confidence },
+        { label: 'Healthy', confidence: Math.max(0.05, 1 - confidence) },
+      ];
+
+  return {
+    prediction,
+    confidence: Number(Math.min(Math.max(confidence, 0), 1).toFixed(4)),
+    top_predictions: topPredictions.map(item => ({
+      label: item.label || prediction,
+      confidence: Number(Math.min(Math.max(Number(item.confidence ?? confidence), 0), 1).toFixed(4)),
+    })),
+    visual_signals: visualSignals,
+    quality: raw.quality || { acceptable: true },
+    model_type: raw.model_type || fallbackType,
+    adapter: raw.adapter || (String(raw.model_type || fallbackType).includes('DEMO') ? 'DEMO' : 'PRODUCTION'),
+  };
+}
+
 async function predict(buffer, crop) {
-  const form = new FormData(); form.append('crop', crop); form.append('image', new Blob([buffer]), 'crop.jpg');
-  try { const response = await fetch(`${process.env.AI_SERVICE_URL || 'http://127.0.0.1:8000'}/predict`, { method: 'POST', body: form }); if (response.ok) return response.json(); } catch { /* service can be started independently */ }
+  const form = new FormData(); form.append('crop', crop); form.append('image', new Blob([buffer], { type: 'image/jpeg' }), 'crop.jpg');
+  try {
+    const response = await fetch(`${process.env.AI_SERVICE_URL || 'http://127.0.0.1:8000'}/predict`, { method: 'POST', body: form });
+    if (response.ok) {
+      const result = await response.json();
+      return normalizePrediction(result, 'PRODUCTION');
+    }
+  } catch { /* service can be started independently */ }
+
   const digest = crypto.createHash('sha256').update(buffer).digest();
   const diseaseLabels = {
     Tomato: ['Early Blight', 'Leaf Mold', 'Septoria Leaf Spot', 'Bacterial Spot', 'Fusarium Wilt'],
@@ -104,7 +142,14 @@ async function predict(buffer, crop) {
   const prediction = diseaseSignal >= 0.5 ? candidates[digest[2] % candidates.length] : 'Healthy';
   const confidence = Number((0.54 + Math.abs(diseaseSignal - 0.5) * 0.36).toFixed(2));
   const alternate = prediction === 'Healthy' ? candidates[digest[2] % candidates.length] : 'Healthy';
-  return { prediction, confidence, top_predictions: [{ label: prediction, confidence }, { label: alternate, confidence: Number((1 - confidence).toFixed(2)) }], model_type: 'DEMO_HEURISTIC_FALLBACK', quality: { acceptable: true } };
+  return normalizePrediction({
+    prediction,
+    confidence,
+    top_predictions: [{ label: prediction, confidence }, { label: alternate, confidence: Number((1 - confidence).toFixed(2)) }],
+    model_type: 'DEMO_HEURISTIC_FALLBACK',
+    adapter: 'DEMO',
+    quality: { acceptable: true },
+  }, 'DEMO_HEURISTIC_FALLBACK');
 }
 
 app.get('/api/health', (_req, res) => res.json({ ok: true, service: 'KrishiAI API', mode: process.env.MONGO_URI ? 'mongo-configured' : 'demo-memory' }));
