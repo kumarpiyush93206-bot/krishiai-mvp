@@ -18,7 +18,7 @@ import {
 import "leaflet/dist/leaflet.css";
 import "./App.css";
 
-const API = "http://localhost:4000/api";
+const API = import.meta.env.VITE_API_URL || "http://localhost:4000/api";
 const DEMO_ACCOUNTS = {
   farmer: ["farmer@demo.krishiai", "Demo@123"],
   expert: ["expert@demo.krishiai", "Demo@123"],
