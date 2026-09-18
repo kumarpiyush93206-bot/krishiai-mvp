@@ -1197,11 +1197,21 @@ function ReportDetail({ report: initial, onError, language }) {
             )}
             {weatherAvailable && report.weather.forecast?.length > 0 && (
               <div className="weather-forecast">
-                {report.weather.forecast.map((item) => (
-                  <span key={item.time}>
-                    {new Date(item.time).getHours()}:00 · {item.temperature}°C
-                  </span>
-                ))}
+                {report.weather.forecast.map((item, idx) => {
+                  let hourStr = "";
+                  const d = new Date(item.time);
+                  if (!Number.isNaN(d.getHours())) {
+                    hourStr = `${String(d.getHours()).padStart(2, "0")}:00`;
+                  } else {
+                    const match = String(item.time).match(/\d+/);
+                    hourStr = match ? `${match[0].padStart(2, "0")}:00` : `+${(idx + 1) * 3}h`;
+                  }
+                  return (
+                    <span key={item.time || idx}>
+                      {hourStr} · {Math.round(Number(item.temperature) || 0)}°C
+                    </span>
+                  );
+                })}
               </div>
             )}
           </div>

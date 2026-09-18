@@ -107,11 +107,15 @@ async function getWeather(lat, lng) {
         const data = await response.json();
         const curr = data.current_condition?.[0] || {};
         const hourly = data.weather?.[0]?.hourly || [];
-        const forecast = hourly.slice(0, 4).map((h, i) => ({
-          time: `${i * 3}:00`,
-          temperature: parseFloat(h.tempC) || 0,
-          rain: parseFloat(h.chanceofrain) || 0
-        }));
+        const forecast = hourly.slice(0, 4).map((h, i) => {
+          const d = new Date();
+          d.setHours(d.getHours() + (i + 1) * 3, 0, 0, 0);
+          return {
+            time: d.toISOString(),
+            temperature: parseFloat(h.tempC) || 0,
+            rain: parseFloat(h.chanceofrain) || 0
+          };
+        });
         return {
           available: true,
           provider: 'wttr.in',
