@@ -1054,7 +1054,12 @@ function ReportDetail({ report: initial, onError, language }) {
   const [note, setNote] = useState("");
   const [ipm, setIpm] = useState(null);
   const visualSignals = report.prediction.visual_signals || {};
-  const signalPercent = (value) => Math.round((Number.isFinite(Number(value)) ? Number(value) : 0) * 100);
+  const signalPercent = (value) => {
+    const num = Number(value);
+    if (!Number.isFinite(num)) return 0;
+    return Math.min(Math.round(num > 1 ? num : num * 100), 100);
+  };
+  const weatherAvailable = Boolean(report?.weather?.available);
   useEffect(() => {
     fetchJson(`/reports/${report.id}`)
       .then(({ report: savedReport, ipm: guidance }) =>
@@ -1157,15 +1162,15 @@ function ReportDetail({ report: initial, onError, language }) {
               <CloudRain size={18} />
               <span>{language === "hi" ? "मौसम" : "Weather"}</span>
             </div>
-            {report.weather.available ? (
+            {weatherAvailable ? (
               <strong>
-                {report.weather.temperature}°C · {report.weather.humidity}%
+                {report.weather.temperature ?? "--"}°C · {report.weather.humidity ?? "--"}%
                 {language === "hi" ? " आर्द्रता" : " humidity"}
               </strong>
             ) : (
               <strong>{language === "hi" ? "मौसम उपलब्ध नहीं" : "Weather unavailable"}</strong>
             )}
-            {report.weather.available && report.weather.forecast?.length > 0 && (
+            {weatherAvailable && report.weather.forecast?.length > 0 && (
               <div className="weather-forecast">
                 {report.weather.forecast.map((item) => (
                   <span key={item.time}>

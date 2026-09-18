@@ -94,12 +94,17 @@ function normalizePrediction(raw = {}, fallbackType = 'PRODUCTION') {
   const prediction = raw.prediction || raw.label || 'Healthy';
   const confidence = Number(raw.confidence ?? 0.5);
   const rawSignals = raw.visual_signals || {};
-  const visualSignals = {
-    leaf_area: Number.isFinite(Number(rawSignals.leaf_area)) ? Number(rawSignals.leaf_area) : 0,
-    brown_orange: Number.isFinite(Number(rawSignals.brown_orange)) ? Number(rawSignals.brown_orange) : 0,
-    yellowing: Number.isFinite(Number(rawSignals.yellowing)) ? Number(rawSignals.yellowing) : 0,
-    ...rawSignals,
+  const normalizeSignal = (value) => {
+    const num = Number(value);
+    if (!Number.isFinite(num)) return 0;
+    return Math.min(num > 1 ? num : num * 100, 100);
   };
+  const visualSignals = Object.fromEntries(
+    Object.entries(rawSignals).map(([key, value]) => [key, normalizeSignal(value)]),
+  );
+  visualSignals.leaf_area = normalizeSignal(rawSignals.leaf_area);
+  visualSignals.brown_orange = normalizeSignal(rawSignals.brown_orange);
+  visualSignals.yellowing = normalizeSignal(rawSignals.yellowing);
   const topPredictions = Array.isArray(raw.top_predictions) && raw.top_predictions.length
     ? raw.top_predictions.map(item => ({ label: item.label || prediction, confidence: Number(item.confidence ?? confidence) }))
     : [
