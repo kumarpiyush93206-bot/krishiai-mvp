@@ -1066,7 +1066,32 @@ function ReportDetail({ report: initial, onError, language }) {
         Promise.all([
           Promise.resolve(savedReport),
           Promise.resolve(guidance),
-          fetchJson(`/weather?lat=${savedReport.latitude}&lng=${savedReport.longitude}`),
+          fetchJson(`/weather?lat=${savedReport.latitude}&lng=${savedReport.longitude}`)
+            .then(async (w) => {
+              if (w?.available) return w;
+              try {
+                const res = await fetch(
+                  `https://api.open-meteo.com/v1/forecast?latitude=${savedReport.latitude}&longitude=${savedReport.longitude}&current=temperature_2m,relative_humidity_2m,precipitation&hourly=temperature_2m,precipitation_probability&forecast_days=1&timezone=auto`
+                );
+                if (res.ok) {
+                  const data = await res.json();
+                  return {
+                    available: true,
+                    provider: "Open-Meteo",
+                    temperature: data.current?.temperature_2m,
+                    humidity: data.current?.relative_humidity_2m,
+                    precipitation: data.current?.precipitation || 0,
+                    forecast:
+                      data.hourly?.time?.slice(0, 4).map((time, index) => ({
+                        time,
+                        temperature: data.hourly.temperature_2m[index],
+                        rain: data.hourly.precipitation_probability[index],
+                      })) || [],
+                  };
+                }
+              } catch {}
+              return w;
+            }),
         ]),
       )
       .then(([savedReport, guidance, weather]) => {

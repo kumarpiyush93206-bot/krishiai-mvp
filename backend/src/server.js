@@ -78,17 +78,52 @@ function riskFor({ confidence, weather, crop, stage, nearbyCount }) {
 async function getWeather(lat, lng) {
   try {
     if (!Number.isFinite(lat) || !Number.isFinite(lng)) return { available: false, message: 'Weather unavailable' };
-    const url = process.env.WEATHER_API_KEY
-      ? `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&units=metric&appid=${process.env.WEATHER_API_KEY}`
-      : `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,relative_humidity_2m,precipitation&hourly=temperature_2m,precipitation_probability&forecast_days=1&timezone=auto`;
-    const response = await fetch(url, { headers: { 'User-Agent': 'KrishiAI-App/1.0 (contact@krishiai.internal)' } });
-    if (!response.ok) throw new Error('weather api error: ' + response.status);
-    const data = await response.json();
-    if (!process.env.WEATHER_API_KEY) {
-      return { available: true, provider: 'Open-Meteo', temperature: data.current?.temperature_2m, humidity: data.current?.relative_humidity_2m, precipitation: data.current?.precipitation || 0, forecast: data.hourly?.time?.slice(0, 4).map((time, index) => ({ time, temperature: data.hourly.temperature_2m[index], rain: data.hourly.precipitation_probability[index] })) || [] };
+
+    if (process.env.WEATHER_API_KEY) {
+      try {
+        const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&units=metric&appid=${process.env.WEATHER_API_KEY}`;
+        const response = await fetch(url);
+        if (response.ok) {
+          const data = await response.json();
+          const current = data.list?.[0];
+          return { available: true, provider: 'OpenWeather', temperature: current?.main?.temp, humidity: current?.main?.humidity, precipitation: (current?.rain?.['3h'] || 0), forecast: data.list?.slice(0, 4).map(item => ({ time: item.dt_txt, temperature: item.main.temp, rain: item.rain?.['3h'] || 0 })) || [] };
+        }
+      } catch (err) { console.warn('OpenWeather error:', err.message); }
     }
-    const current = data.list?.[0];
-    return { available: true, provider: 'OpenWeather', temperature: current?.main?.temp, humidity: current?.main?.humidity, precipitation: (current?.rain?.['3h'] || 0), forecast: data.list?.slice(0, 4).map(item => ({ time: item.dt_txt, temperature: item.main.temp, rain: item.rain?.['3h'] || 0 })) || [] };
+
+    try {
+      const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,relative_humidity_2m,precipitation&hourly=temperature_2m,precipitation_probability&forecast_days=1&timezone=auto`;
+      const response = await fetch(url, { headers: { 'User-Agent': 'KrishiAI-App/1.0 (contact@krishiai.internal)' } });
+      if (response.ok) {
+        const data = await response.json();
+        return { available: true, provider: 'Open-Meteo', temperature: data.current?.temperature_2m, humidity: data.current?.relative_humidity_2m, precipitation: data.current?.precipitation || 0, forecast: data.hourly?.time?.slice(0, 4).map((time, index) => ({ time, temperature: data.hourly.temperature_2m[index], rain: data.hourly.precipitation_probability[index] })) || [] };
+      }
+    } catch (err) { console.warn('Open-Meteo error:', err.message); }
+
+    try {
+      const url = `https://wttr.in/${lat},${lng}?format=j1`;
+      const response = await fetch(url, { headers: { 'User-Agent': 'curl/8.0' } });
+      if (response.ok) {
+        const data = await response.json();
+        const curr = data.current_condition?.[0] || {};
+        const hourly = data.weather?.[0]?.hourly || [];
+        const forecast = hourly.slice(0, 4).map((h, i) => ({
+          time: `${i * 3}:00`,
+          temperature: parseFloat(h.tempC) || 0,
+          rain: parseFloat(h.chanceofrain) || 0
+        }));
+        return {
+          available: true,
+          provider: 'wttr.in',
+          temperature: parseFloat(curr.temp_C) || 25,
+          humidity: parseFloat(curr.humidity) || 80,
+          precipitation: parseFloat(curr.precipMM) || 0,
+          forecast
+        };
+      }
+    } catch (err) { console.warn('wttr fallback error:', err.message); }
+
+    return { available: false, message: 'Weather unavailable' };
   } catch (err) {
     console.error('Weather fetch error:', err.message);
     return { available: false, message: 'Weather unavailable' };
