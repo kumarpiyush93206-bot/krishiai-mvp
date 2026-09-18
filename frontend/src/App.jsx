@@ -24,6 +24,276 @@ const DEMO_ACCOUNTS = {
   expert: ["expert@demo.krishiai", "Demo@123"],
   officer: ["officer@demo.krishiai", "Demo@123"],
 };
+const LANG = {
+  en: {
+    welcomeBack: "WELCOME BACK",
+    joinField: "JOIN THE FIELD NETWORK",
+    farmHeading: "Your field, at a glance.",
+    startMonitoring: "Start monitoring smarter.",
+    signInPrompt: "Sign in to continue your crop health journey.",
+    createPrompt: "Create a farmer account to get clear, practical crop guidance.",
+    fullName: "Full name",
+    email: "Email address",
+    password: "Password",
+    demoAccess: "Demo access",
+    signIn: "Sign in",
+    createAccount: "Create account",
+    newToKrishi: "New to KrishiAI? Create account",
+    alreadyHave: "Already have an account? Sign in",
+    farmerOverview: "FARMER OVERVIEW",
+    goodMorning: "Good morning, farmer.",
+    fieldSummary: "A clear view of what your fields are telling you today.",
+    checkCrop: "Check a crop",
+    fieldSignal: "FIELD SIGNAL",
+    fieldsReady: "Your fields are ready",
+    addFirstField: "Add your first field and upload a crop image to start.",
+    supportedCrops: "SUPPORTED CROPS",
+    startWithWhatYouGrow: "Start with what you grow.",
+    cropAdvice: "Our first release focuses on three crops so advice stays relevant and useful.",
+    viewAll: "View all",
+    openFullReport: "Open full report",
+    latestFieldCheck: "LATEST FIELD CHECK",
+    cropHealthSnapshot: "health snapshot",
+    aiResult: "AI result",
+    confidence: "Confidence",
+    weather: "Weather",
+    riskLevel: "Risk level",
+    ipmAdvisory: "IPM advisory",
+    expertValidation: "Expert validation",
+    recentActivity: "RECENT ACTIVITY",
+    cropHealthChecks: "Crop health checks",
+    newCropCheck: "NEW CROP CHECK",
+    readYourField: "Let's read your field.",
+    uploadPrompt: "Upload one clear image. We will combine it with crop stage, weather, and nearby signals.",
+    fieldDetails: "FIELD DETAILS",
+    whereCropGrows: "Where is this crop growing?",
+    fieldName: "Field name",
+    crop: "Crop",
+    sowingDate: "Sowing date",
+    cropStage: "Crop stage",
+    location: "Location",
+    locateMe: "Locate me",
+    submit: "Check crop health",
+    review: "REVIEW",
+    recordSummary: "Record summary",
+    save: "Save",
+    clear: "Clear",
+    weatherUnavailable: "Weather unavailable",
+    riskLabel: "Risk",
+    actions: "Action items",
+    recommendedAction: "Recommended action",
+    noReports: "No crop checks yet.",
+    uploadFirstImage: "Upload your first image",
+    fullReport: "Full report",
+    everyCheck: "Every check, in one place.",
+    trackFields: "Track how your fields change over time.",
+    cropHealthReport: "CROP HEALTH REPORT",
+    aiConfidence: "AI confidence",
+    possibleProblem: "POSSIBLE PROBLEM",
+    expertValidationRecommended: "Expert validation recommended",
+    expertReviewHint: "AI confidence is below the review threshold. A qualified expert should confirm this possible problem.",
+    riskAssessment: "RISK ASSESSMENT",
+    whyRisk: "Why is the risk",
+    weatherLabel: "Weather",
+    ipmGuidance: "IPM ADVISORY",
+    loadingGuidance: "Loading structured advisory...",
+    followUp: "FOLLOW-UP",
+    howCropNow: "How is the crop now?",
+    saveFollowUp: "Save follow-up",
+    savedNote: "Saved:",
+    byStage: "Farmer-selected stage:",
+    otherSignal: "Other possible signal:",
+    checkSignals: "Checking field signals...",
+    useGps: "Use my GPS",
+    chooseCropImage: "Choose a clear crop image",
+    demoNote: "The current AI result is clearly labelled as a development model. It is an interface-ready adapter for a trained model.",
+    askExpertBeforeChemicals: "Ask an expert before chemicals",
+    useVerifiedIpm: "Use verified IPM guidance",
+    waitAdvisory: "Wait for advisory guidance",
+    requestExpertReview: "Request expert review",
+    expertReviewRequested: "Expert review requested",
+    fieldSignalText: "Field intelligence for the farmers who feed India. Simple, timely, grounded in agricultural science.",
+    smartIndia: "SMART INDIA HACKATHON 2026",
+    knowCrop: "Know your crop.",
+    growConfidence: "Grow with confidence.",
+    supportedCropsCount: "3 crops supported",
+    fieldSignalsAllDay: "24/7 field signals",
+    useMyGpsCaps: "Use my GPS",
+    verified: "verified",
+    demo: "demo account",
+    commandCenter: "OFFICER COMMAND CENTER",
+    seeBiggerPicture: "See the bigger picture.",
+    officerMsg: "Aggregated signals from farmer reports. Potential hotspots are not automatic government action.",
+    totalReports: "Total reports",
+    highRiskReports: "High-risk reports",
+    potentialHotspots: "Potential hotspots",
+    reportDistribution: "REPORT DISTRIBUTION",
+    problemsObserved: "Problems observed",
+    recentReports: "RECENT REPORTS",
+    locationView: "LOCATION VIEW",
+    hotspots: "Potential hotspots",
+    expertWorkspace: "EXPERT WORKSPACE",
+    casesNeedingEye: "Cases needing your eye.",
+    reviewLowerConfidence: "Review lower-confidence signals and give farmers a validated answer.",
+    pendingCases: "Pending cases",
+    modelSignals: "Model signals",
+    assistive: "Assistive",
+    backToQueue: "Back to queue",
+    caseReview: "CASE REVIEW",
+    whatDoYouSee: "What do you see?",
+    validatedProblem: "Validated problem",
+    remarks: "Remarks",
+    markValidated: "Mark validated",
+    fieldsMonitored: "Fields monitored",
+    cropChecks: "Crop checks",
+    highRiskAlerts: "High-risk alerts",
+    noChecksYet: "No crop checks yet.",
+    uploadImage: "Upload your first image",
+    recentActivityLabel: "RECENT ACTIVITY",
+    startWithWhatGrow: "Start with what you grow.",
+    aiAssessment: "AI assessment",
+    developmentModel: "Development model",
+    expertValidated: "Expert validated",
+    reviewRecommended: "Review recommended",
+    reviewPending: "Pending review",
+    validated: "Validated",
+    pending: "Pending",
+  },
+  hi: {
+    welcomeBack: "आपका फिर से स्वागत है",
+    joinField: "फ़ील्ड नेटवर्क में शामिल हों",
+    farmHeading: "आपका खेत, एक नज़र में।",
+    startMonitoring: "अधिक स्मार्ट तरीके से निगरानी शुरू करें।",
+    signInPrompt: "अपने फसल स्वास्थ्य पथ पर जारी रहने के लिए साइन इन करें।",
+    createPrompt: "स्पष्ट और व्यावहारिक फसल मार्गदर्शन पाने के लिए किसान अकाउंट बनाएं।",
+    fullName: "पूरा नाम",
+    email: "ईमेल पता",
+    password: "पासवर्ड",
+    demoAccess: "डेमो एक्सेस",
+    signIn: "साइन इन",
+    createAccount: "अकाउंट बनाएं",
+    newToKrishi: "KrishiAI से नए हैं? अकाउंट बनाएं",
+    alreadyHave: "अकाउंट पहले से है? साइन इन",
+    farmerOverview: "किसान अवलोकन",
+    goodMorning: "शुभ प्रभात, किसान।",
+    fieldSummary: "आज आपके खेत आपको क्या बता रहे हैं, यह साफ़ दृश्य।",
+    checkCrop: "फसल जांचें",
+    fieldSignal: "फ़ील्ड सिग्नल",
+    fieldsReady: "आपके खेत तैयार हैं",
+    addFirstField: "पहला खेत जोड़ें और फसल की तस्वीर अपलोड करें।",
+    supportedCrops: "सामर्थ्यपूर्ण फसलें",
+    startWithWhatYouGrow: "आपकी फसल से शुरू करें।",
+    cropAdvice: "हमारा पहला रिलीज़ केवल तीन फसलों पर केंद्रित है ताकि सलाह प्रासंगिक और उपयोगी रहे।",
+    viewAll: "सभी देखें",
+    openFullReport: "पूर्ण रिपोर्ट खोलें",
+    latestFieldCheck: "नवीनतम फील्ड चेक",
+    cropHealthSnapshot: "स्वास्थ्य स्नैपशॉट",
+    aiResult: "एआई परिणाम",
+    confidence: "विश्वास",
+    weather: "मौसम",
+    riskLevel: "जोखिम स्तर",
+    ipmAdvisory: "IPM सलाह",
+    expertValidation: "विशेषज्ञ सत्यापन",
+    recentActivity: "हाल की गतिविधि",
+    cropHealthChecks: "फसल स्वास्थ्य जांच",
+    newCropCheck: "नई फसल जांच",
+    readYourField: "आइए आपके खेत को पढ़ें।",
+    uploadPrompt: "एक स्पष्ट तस्वीर अपलोड करें। हम इसे फसल की अवस्था, मौसम और पास के संकेतों के साथ संयोजित करेंगे।",
+    fieldDetails: "फ़ील्ड विवरण",
+    whereCropGrows: "यह फसल कहाँ उग रही है?",
+    fieldName: "फ़ील्ड नाम",
+    crop: "फसल",
+    sowingDate: "बुवाई की तिथि",
+    cropStage: "फसल अवस्था",
+    location: "स्थान",
+    locateMe: "मुझे ढूंढें",
+    submit: "फसल स्वास्थ्य जांचें",
+    review: "समीक्षा",
+    recordSummary: "रिकॉर्ड सारांश",
+    save: "सेव करें",
+    clear: "साफ़ करें",
+    weatherUnavailable: "मौसम उपलब्ध नहीं",
+    riskLabel: "जोखिम",
+    actions: "कार्रवाई आइटम",
+    recommendedAction: "सिफारिश की गई कार्रवाई",
+    noReports: "अभी तक कोई फसल जांच नहीं है।",
+    uploadFirstImage: "पहली तस्वीर अपलोड करें",
+    fullReport: "पूर्ण रिपोर्ट",
+    everyCheck: "हर जांच एक ही जगह।",
+    trackFields: "ट्रैक करें कि आपके खेत समय के साथ कैसे बदलते हैं।",
+    cropHealthReport: "फसल स्वास्थ्य रिपोर्ट",
+    aiConfidence: "एआई विश्वास",
+    possibleProblem: "संभव समस्या",
+    expertValidationRecommended: "विशेषज्ञ सत्यापन की सिफारिश",
+    expertReviewHint: "एआई विश्वास समीक्षा सीमा से नीचे है। एक योग्य विशेषज्ञ को यह संभावित समस्या सत्यापित करनी चाहिए।",
+    riskAssessment: "जोखिम मूल्यांकन",
+    whyRisk: "जोखिम क्यों",
+    weatherLabel: "मौसम",
+    ipmGuidance: "IPM सलाह",
+    loadingGuidance: "संरचित सलाह लोड हो रही है...",
+    followUp: "फॉलो-अप",
+    howCropNow: "फसल अब कैसी है?",
+    saveFollowUp: "फॉलो-अप सेव करें",
+    savedNote: "सेव किया गया:",
+    byStage: "किसान द्वारा चुनी गई अवस्था:",
+    otherSignal: "अन्य संभावित संकेत:",
+    checkSignals: "फ़ील्ड संकेत जाँच रहे हैं...",
+    useGps: "मेरा जीपीएस उपयोग करें",
+    chooseCropImage: "स्पष्ट फसल फोटो चुनें",
+    demoNote: "वर्तमान एआई परिणाम को स्पष्ट रूप से विकास मॉडल के रूप में लेबल किया गया है। यह प्रशिक्षित मॉडल के लिए इंटरफ़ेस तैयार एडाप्टर है।",
+    askExpertBeforeChemicals: "रसायनों से पहले विशेषज्ञ से सलाह लें",
+    useVerifiedIpm: "सत्यापित IPM मार्गदर्शन लागू करें",
+    waitAdvisory: "सलाह का इंतजार करें",
+    requestExpertReview: "विशेषज्ञ समीक्षा का अनुरोध करें",
+    expertReviewRequested: "विशेषज्ञ समीक्षा अनुरोधित",
+    fieldSignalText: "भारत की फ़सलें खिलाने वाले किसानों के लिए फ़ील्ड इंटेलिजेंस। सरल, समय पर, कृषि विज्ञान पर आधारित।",
+    smartIndia: "स्मार्ट इंडिया हैकाथॉन 2026",
+    knowCrop: "अपना फसल जानें।",
+    growConfidence: "आत्मविश्वास से बढ़ें।",
+    supportedCropsCount: "3 फसलें समर्थित",
+    fieldSignalsAllDay: "24/7 फ़ील्ड संकेत",
+    useMyGpsCaps: "मेरा जीपीएस उपयोग करें",
+    verified: "सत्यापित",
+    demo: "डेमो अकाउंट",
+    commandCenter: "अधिकारी कमांड सेंटर",
+    seeBiggerPicture: "बड़ी तस्वीर देखें।",
+    officerMsg: "किसानों की रिपोर्टों से एकत्रित संकेत। संभावित हॉटस्पॉट स्वचालित सरकारी कार्रवाई नहीं हैं।",
+    totalReports: "कुल रिपोर्टें",
+    highRiskReports: "उच्च जोखिम रिपोर्टें",
+    potentialHotspots: "संभावित हॉटस्पॉट",
+    reportDistribution: "रिपोर्ट वितरण",
+    problemsObserved: "देखी गई समस्याएँ",
+    recentReports: "हाल की रिपोर्टें",
+    locationView: "स्थान दृश्य",
+    hotspots: "संभावित हॉटस्पॉट",
+    expertWorkspace: "विशेषज्ञ कार्यक्षेत्र",
+    casesNeedingEye: "ऐसे मामले जिनमें आपकी आँख की ज़रूरत है।",
+    reviewLowerConfidence: "कम भरोसे वाले संकेतों की समीक्षा करें और किसानों को सत्यापित उत्तर दें।",
+    pendingCases: "लंबित मामले",
+    modelSignals: "मॉडल संकेत",
+    assistive: "सहायक",
+    backToQueue: "कतार पर वापस",
+    caseReview: "मामला समीक्षा",
+    whatDoYouSee: "आप क्या देखते हैं?",
+    validatedProblem: "सत्यापित समस्या",
+    remarks: "टिप्पणियाँ",
+    markValidated: "सत्यापित करें",
+    fieldsMonitored: "पर्यवेक्षित खेत",
+    cropChecks: "फसल जांचें",
+    highRiskAlerts: "उच्च जोखिम अलर्ट",
+    noChecksYet: "अभी तक कोई फसल जांच नहीं है।",
+    uploadImage: "पहली तस्वीर अपलोड करें",
+    recentActivityLabel: "हाल की गतिविधि",
+    startWithWhatGrow: "आपकी फसल से शुरू करें।",
+    aiAssessment: "एआई मूल्यांकन",
+    developmentModel: "विकास मॉडल",
+    expertValidated: "विशेषज्ञ सत्यापित",
+    reviewRecommended: "समीक्षा की सिफारिश",
+    reviewPending: "लंबित समीक्षा",
+    validated: "सत्यापित",
+    pending: "लंबित",
+  },
+};
 const fetchJson = async (path, options = {}) => {
   const token = localStorage.getItem("krishiai_token");
   const headers = {
@@ -81,10 +351,11 @@ function App() {
     localStorage.clear();
     setUser(null);
   };
-  if (!user) return <Auth onLogin={login} onError={setError} error={error} />;
+  const copy = LANG[language] || LANG.en;
+  if (!user) return <Auth onLogin={login} onError={setError} error={error} language={language} />;
   return (
     <div className="app-shell">
-      <Sidebar user={user} page={page} setPage={setPage} logout={logout} />
+      <Sidebar user={user} page={page} setPage={setPage} logout={logout} language={language} />
       <main className="main">
         <header className="topbar">
           <div className="mobile-brand">
@@ -106,22 +377,23 @@ function App() {
           </div>
         )}
         {user.role === "farmer" && (
-          <FarmerView page={page} setPage={setPage} onError={setError} />
+          <FarmerView page={page} setPage={setPage} onError={setError} language={language} />
         )}
         {user.role === "expert" && (
-          <ExpertView page={page} onError={setError} />
+          <ExpertView page={page} onError={setError} language={language} />
         )}
         {user.role === "officer" && (
-          <OfficerView page={page} onError={setError} />
+          <OfficerView page={page} onError={setError} language={language} />
         )}
       </main>
     </div>
   );
 }
 
-function Auth({ onLogin, onError, error }) {
+function Auth({ onLogin, onError, error, language }) {
   const [mode, setMode] = useState("login");
   const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const copy = LANG[language] || LANG.en;
   const submit = async (event) => {
     event.preventDefault();
     try {
@@ -146,23 +418,22 @@ function Auth({ onLogin, onError, error }) {
           <Leaf size={30} /> KrishiAI
         </div>
         <div className="aside-copy">
-          <p className="eyebrow">SMART INDIA HACKATHON 2026</p>
+          <p className="eyebrow">{language === "hi" ? copy.smartIndia : "SMART INDIA HACKATHON 2026"}</p>
           <h1>
-            Know your crop.
+            {language === "hi" ? copy.knowCrop : "Know your crop."}
             <br />
-            <em>Grow with confidence.</em>
+            <em>{language === "hi" ? copy.growConfidence : "Grow with confidence."}</em>
           </h1>
           <p>
-            Field intelligence for the farmers who feed India. Simple, timely,
-            grounded in agricultural science.
+            {language === "hi" ? copy.fieldSignalText : "Field intelligence for the farmers who feed India. Simple, timely, grounded in agricultural science."}
           </p>
         </div>
         <div className="aside-stats">
           <span>
-            <strong>3</strong> crops supported
+            <strong>3</strong> {language === "hi" ? copy.supportedCropsCount : "crops supported"}
           </span>
           <span>
-            <strong>24/7</strong> field signals
+            <strong>24/7</strong> {language === "hi" ? copy.fieldSignalsAllDay : "field signals"}
           </span>
         </div>
       </div>
@@ -171,22 +442,18 @@ function Auth({ onLogin, onError, error }) {
           <Leaf size={24} /> KrishiAI
         </div>
         <p className="eyebrow">
-          {mode === "login" ? "WELCOME BACK" : "JOIN THE FIELD NETWORK"}
+          {mode === "login" ? copy.welcomeBack : copy.joinField}
         </p>
         <h2>
-          {mode === "login"
-            ? "Your field, at a glance."
-            : "Start monitoring smarter."}
+          {mode === "login" ? copy.farmHeading : copy.startMonitoring}
         </h2>
         <p className="muted">
-          {mode === "login"
-            ? "Sign in to continue your crop health journey."
-            : "Create a farmer account to get clear, practical crop guidance."}
+          {mode === "login" ? copy.signInPrompt : copy.createPrompt}
         </p>
         <form onSubmit={submit}>
           {mode === "register" && (
             <label>
-              Full name
+              {copy.fullName}
               <input
                 required
                 value={form.name}
@@ -196,7 +463,7 @@ function Auth({ onLogin, onError, error }) {
             </label>
           )}
           <label>
-            Email address
+            {copy.email}
             <input
               required
               type="email"
@@ -206,7 +473,7 @@ function Auth({ onLogin, onError, error }) {
             />
           </label>
           <label>
-            Password
+            {copy.password}
             <input
               required
               type="password"
@@ -217,12 +484,12 @@ function Auth({ onLogin, onError, error }) {
           </label>
           {error && <p className="form-error">{error}</p>}
           <button className="primary full">
-            {mode === "login" ? "Sign in" : "Create account"}{" "}
+            {mode === "login" ? copy.signIn : copy.createAccount}{" "}
             <ArrowRight size={18} />
           </button>
         </form>
         <div className="demo-logins">
-          <span>Demo access</span>
+          <span>{copy.demoAccess}</span>
           {Object.entries(DEMO_ACCOUNTS).map(([role, account]) => (
             <button key={role} onClick={() => onLogin(...account)}>
               {role}
@@ -233,28 +500,27 @@ function Auth({ onLogin, onError, error }) {
           className="text-button"
           onClick={() => setMode(mode === "login" ? "register" : "login")}
         >
-          {mode === "login"
-            ? "New to KrishiAI? Create account"
-            : "Already have an account? Sign in"}
+          {mode === "login" ? copy.newToKrishi : copy.alreadyHave}
         </button>
       </div>
     </div>
   );
 }
 
-function Sidebar({ user, page, setPage, logout }) {
+function Sidebar({ user, page, setPage, logout, language }) {
+  const isHindi = language === "hi";
   const items =
     user.role === "farmer"
       ? [
-          ["dashboard", "Overview", Activity],
-          ["report", "New crop check", Upload],
-          ["history", "Report history", Leaf],
+          ["dashboard", isHindi ? "अवलोकन" : "Overview", Activity],
+          ["report", isHindi ? "नई फसल जांच" : "New crop check", Upload],
+          ["history", isHindi ? "रिपोर्ट इतिहास" : "Report history", Leaf],
         ]
       : user.role === "expert"
-        ? [["dashboard", "Expert queue", ShieldCheck]]
+        ? [["dashboard", isHindi ? "विशेषज्ञ कतार" : "Expert queue", ShieldCheck]]
         : [
-            ["dashboard", "Command center", Activity],
-            ["map", "Risk map", MapPin],
+            ["dashboard", isHindi ? "कमांड सेंटर" : "Command center", Activity],
+            ["map", isHindi ? "जोखिम मानचित्र" : "Risk map", MapPin],
           ];
   return (
     <aside className="sidebar">
@@ -268,7 +534,7 @@ function Sidebar({ user, page, setPage, logout }) {
         <div>
           <strong>{user.name}</strong>
           <small>
-            {user.role} · {user.isDemo ? "demo account" : "verified"}
+            {user.role} · {user.isDemo ? (isHindi ? "डेमो अकाउंट" : "demo account") : (isHindi ? "सत्यापित" : "verified")}
           </small>
         </div>
       </div>
@@ -287,20 +553,20 @@ function Sidebar({ user, page, setPage, logout }) {
         <div className="trust">
           <CheckCircle2 size={17} />
           <span>
-            AI-assisted
+            {isHindi ? "एआई-सहायता" : "AI-assisted"}
             <br />
-            <b>Expert-ready</b>
+            <b>{isHindi ? "विशेषज्ञ-तैयार" : "Expert-ready"}</b>
           </span>
         </div>
         <button className="logout" onClick={logout}>
-          <LogOut size={17} /> Sign out
+          <LogOut size={17} /> {isHindi ? "साइन आउट" : "Sign out"}
         </button>
       </div>
     </aside>
   );
 }
 
-function FarmerView({ page, setPage, onError }) {
+function FarmerView({ page, setPage, onError, language }) {
   const [reports, setReports] = useState([]);
   const [fields, setFields] = useState([]);
   const [selected, setSelected] = useState(null);
@@ -326,37 +592,38 @@ function FarmerView({ page, setPage, onError }) {
           refresh();
         }}
         onError={onError}
+        language={language}
       />
     );
   if (page === "history")
     return (
-      <History reports={reports} setSelected={setSelected} setPage={setPage} />
+      <History reports={reports} setSelected={setSelected} setPage={setPage} language={language} />
     );
   if (page === "advisory" && selected)
-    return <ReportDetail report={selected} onError={onError} />;
+    return <ReportDetail report={selected} onError={onError} language={language} />;
   return (
     <FarmerDashboard
       reports={reports}
       fields={fields}
       setPage={setPage}
       setSelected={setSelected}
+      language={language}
     />
   );
 }
-function FarmerDashboard({ reports, fields, setPage, setSelected }) {
+function FarmerDashboard({ reports, fields, setPage, setSelected, language }) {
   const latest = reports[0];
+  const copy = LANG[language] || LANG.en;
   return (
     <div className="content">
       <div className="page-heading">
         <div>
-          <p className="eyebrow">FARMER OVERVIEW</p>
-          <h1>Good morning, farmer.</h1>
-          <p className="muted">
-            A clear view of what your fields are telling you today.
-          </p>
+          <p className="eyebrow">{copy.farmerOverview}</p>
+          <h1>{copy.goodMorning}</h1>
+          <p className="muted">{copy.fieldSummary}</p>
         </div>
         <button className="primary" onClick={() => setPage("report")}>
-          <Upload size={18} /> Check a crop
+          <Upload size={18} /> {copy.checkCrop}
         </button>
       </div>
       <section className="signal-banner">
@@ -364,25 +631,23 @@ function FarmerDashboard({ reports, fields, setPage, setSelected }) {
           <Sun size={25} />
         </div>
         <div>
-          <p className="eyebrow">FIELD SIGNAL</p>
+          <p className="eyebrow">{copy.fieldSignal}</p>
           <h3>
             {latest
               ? `${latest.crop} check is ${latest.risk.level.toLowerCase()} risk`
-              : "Your fields are ready"}
+              : copy.fieldsReady}
           </h3>
           <p>
-            {latest
-              ? latest.risk.reasons[0]
-              : "Add your first field and upload a crop image to start."}
+            {latest ? latest.risk.reasons[0] : copy.addFirstField}
           </p>
         </div>
         <ArrowRight size={20} />
       </section>
       <div className="stats-grid">
-        <Stat label="Fields monitored" value={fields.length} icon={MapPin} />
-        <Stat label="Crop checks" value={reports.length} icon={Activity} />
+        <Stat label={language === "hi" ? "पर्यवेक्षित खेत" : "Fields monitored"} value={fields.length} icon={MapPin} />
+        <Stat label={language === "hi" ? "फसल जांचें" : "Crop checks"} value={reports.length} icon={Activity} />
         <Stat
-          label="High-risk alerts"
+          label={language === "hi" ? "उच्च जोखिम अलर्ट" : "High-risk alerts"}
           value={reports.filter((r) => r.risk.level === "HIGH").length}
           icon={CloudRain}
           alert
@@ -392,8 +657,8 @@ function FarmerDashboard({ reports, fields, setPage, setSelected }) {
         <section className="insight-section">
           <div className="section-intro">
             <div>
-              <p className="eyebrow">LATEST FIELD CHECK</p>
-              <h2>{latest.crop} health snapshot</h2>
+              <p className="eyebrow">{language === "hi" ? "नवीनतम फील्ड चेक" : "LATEST FIELD CHECK"}</p>
+              <h2>{latest.crop} {language === "hi" ? "स्वास्थ्य स्नैपशॉट" : "health snapshot"}</h2>
             </div>
             <button
               className="text-button"
@@ -402,15 +667,15 @@ function FarmerDashboard({ reports, fields, setPage, setSelected }) {
                 setPage("advisory");
               }}
             >
-              Open full report <ArrowRight size={15} />
+              {language === "hi" ? "पूर्ण रिपोर्ट खोलें" : "Open full report"} <ArrowRight size={15} />
             </button>
           </div>
           <div className="insight-grid">
             <InsightCard
               icon={Activity}
-              label="AI result"
+              label={language === "hi" ? "एआई परिणाम" : "AI result"}
               value={latest.prediction.prediction}
-              detail={latest.prediction.model_type?.includes("DEMO") ? "DEMO model signal" : "AI model signal"}
+              detail={latest.prediction.model_type?.includes("DEMO") ? (language === "hi" ? "DEMO मॉडल संकेत" : "DEMO model signal") : (language === "hi" ? "एआई मॉडल संकेत" : "AI model signal") }
               onClick={() => {
                 setSelected(latest);
                 setPage("advisory");
@@ -418,30 +683,30 @@ function FarmerDashboard({ reports, fields, setPage, setSelected }) {
             />
             <InsightCard
               icon={Activity}
-              label="Confidence"
+              label={language === "hi" ? "विश्वास" : "Confidence"}
               value={`${Math.round(latest.prediction.confidence * 100)}%`}
-              detail="How certain the AI is"
+              detail={language === "hi" ? "एआई कितने निश्चित है" : "How certain the AI is"}
               tone="lime"
             />
             <InsightCard
               icon={Sun}
-              label="Weather"
-              value={latest.weather?.available ? `${latest.weather.temperature}°C` : "Unavailable"}
-              detail={latest.weather?.available ? `${latest.weather.humidity}% humidity` : "Check report details"}
+              label={language === "hi" ? "मौसम" : "Weather"}
+              value={latest.weather?.available ? `${latest.weather.temperature}°C` : (language === "hi" ? "उपलब्ध नहीं" : "Unavailable")}
+              detail={latest.weather?.available ? `${latest.weather.humidity}% आर्द्रता` : (language === "hi" ? "रिपोर्ट विवरण देखें" : "Check report details")}
               tone="sky"
             />
             <InsightCard
               icon={CloudRain}
-              label="Risk level"
+              label={language === "hi" ? "जोखिम स्तर" : "Risk level"}
               value={latest.risk.level}
               detail={latest.risk.reasons[0]}
               tone={latest.risk.level === "HIGH" ? "red" : "amber"}
             />
             <InsightCard
               icon={Leaf}
-              label="IPM advisory"
-              value="Ready"
-              detail="Practical crop-care guidance"
+              label={language === "hi" ? "IPM सलाह" : "IPM advisory"}
+              value={language === "hi" ? "तैयार" : "Ready"}
+              detail={language === "hi" ? "व्यावहारिक फसल-संरक्षण मार्गदर्शन" : "Practical crop-care guidance"}
               tone="green"
               onClick={() => {
                 setSelected(latest);
@@ -450,9 +715,9 @@ function FarmerDashboard({ reports, fields, setPage, setSelected }) {
             />
             <InsightCard
               icon={ShieldCheck}
-              label="Expert validation"
-              value={latest.status === "validated" ? "Validated" : "Pending"}
-              detail={latest.status === "validated" ? "Reviewed by an expert" : "Review recommended"}
+              label={language === "hi" ? "विशेषज्ञ सत्यापन" : "Expert validation"}
+              value={latest.status === "validated" ? (language === "hi" ? "सत्यापित" : "Validated") : (language === "hi" ? "लंबित" : "Pending")}
+              detail={latest.status === "validated" ? (language === "hi" ? "विशेषज्ञ द्वारा समीक्षा की गई" : "Reviewed by an expert") : (language === "hi" ? "समीक्षा की सिफारिश" : "Review recommended")}
               tone={latest.status === "validated" ? "green" : "amber"}
               onClick={() => {
                 setSelected(latest);
@@ -466,11 +731,11 @@ function FarmerDashboard({ reports, fields, setPage, setSelected }) {
         <div className="panel wide">
           <div className="panel-head">
             <div>
-              <p className="eyebrow">RECENT ACTIVITY</p>
-              <h2>Crop health checks</h2>
+              <p className="eyebrow">{language === "hi" ? "हाल की गतिविधि" : "RECENT ACTIVITY"}</p>
+              <h2>{language === "hi" ? "फसल स्वास्थ्य जांच" : "Crop health checks"}</h2>
             </div>
             <button className="text-button" onClick={() => setPage("history")}>
-              View all <ArrowRight size={15} />
+              {language === "hi" ? "सभी देखें" : "View all"} <ArrowRight size={15} />
             </button>
           </div>
           {reports.length ? (
@@ -485,12 +750,12 @@ function FarmerDashboard({ reports, fields, setPage, setSelected }) {
               />
             ))
           ) : (
-            <Empty onClick={() => setPage("report")} />
+            <Empty onClick={() => setPage("report")} language={language} />
           )}
         </div>
         <div className="panel">
-          <p className="eyebrow">SUPPORTED CROPS</p>
-          <h2>Start with what you grow.</h2>
+          <p className="eyebrow">{language === "hi" ? "सामर्थ्यपूर्ण फसलें" : "SUPPORTED CROPS"}</p>
+          <h2>{language === "hi" ? "आपकी फसल से शुरू करें।" : "Start with what you grow."}</h2>
           <div className="crop-list">
             <span>
               <i className="crop-tomato" /> Tomato
@@ -503,8 +768,7 @@ function FarmerDashboard({ reports, fields, setPage, setSelected }) {
             </span>
           </div>
           <p className="small muted">
-            Our first release focuses on three crops so advice stays relevant
-            and useful.
+            {language === "hi" ? "हमारा पहला रिलीज़ केवल तीन फसलों पर केंद्रित है ताकि सलाह प्रासंगिक और उपयोगी रहे।" : "Our first release focuses on three crops so advice stays relevant and useful."}
           </p>
         </div>
       </div>
@@ -570,19 +834,20 @@ function RiskBadge({ level }) {
     </span>
   );
 }
-function Empty({ onClick }) {
+function Empty({ onClick, language }) {
   return (
     <div className="empty">
       <Leaf size={30} />
-      <p>No crop checks yet.</p>
+      <p>{language === "hi" ? "अभी तक कोई फसल जांच नहीं है।" : "No crop checks yet."}</p>
       <button className="text-button" onClick={onClick}>
-        Upload your first image <ArrowRight size={15} />
+        {language === "hi" ? "पहली तस्वीर अपलोड करें" : "Upload your first image"} <ArrowRight size={15} />
       </button>
     </div>
   );
 }
 
-function ReportForm({ fields, onDone, onError }) {
+function ReportForm({ fields, onDone, onError, language }) {
+  const t = LANG[language] || LANG.en;
   const [form, setForm] = useState({
     name: "",
     crop: "Tomato",
@@ -604,7 +869,7 @@ function ReportForm({ fields, onDone, onError }) {
         }),
       () =>
         onError(
-          "Location permission was not granted. Using the default location.",
+          language === "hi" ? "स्थान की अनुमति नहीं दी गई। डिफ़ॉल्ट स्थान का उपयोग किया जा रहा है।" : "Location permission was not granted. Using the default location.",
         ),
     );
   const submit = async (e) => {
@@ -639,11 +904,10 @@ function ReportForm({ fields, onDone, onError }) {
     <div className="content narrow">
       <div className="page-heading">
         <div>
-          <p className="eyebrow">NEW CROP CHECK</p>
-          <h1>Let's read your field.</h1>
+          <p className="eyebrow">{language === "hi" ? "नई फसल जांच" : "NEW CROP CHECK"}</p>
+          <h1>{language === "hi" ? "आइए आपके खेत को पढ़ें।" : "Let's read your field."}</h1>
           <p className="muted">
-            Upload one clear image. We will combine it with crop stage, weather,
-            and nearby signals.
+            {language === "hi" ? "एक स्पष्ट तस्वीर अपलोड करें। हम इसे फसल की अवस्था, मौसम और पास के संकेतों के साथ संयोजित करेंगे।" : "Upload one clear image. We will combine it with crop stage, weather, and nearby signals."}
           </p>
         </div>
       </div>
@@ -651,20 +915,20 @@ function ReportForm({ fields, onDone, onError }) {
         <section className="panel step">
           <div className="step-number">01</div>
           <div className="step-body">
-            <p className="eyebrow">FIELD DETAILS</p>
-            <h2>Where is this crop growing?</h2>
+            <p className="eyebrow">{language === "hi" ? "फ़ील्ड विवरण" : "FIELD DETAILS"}</p>
+            <h2>{language === "hi" ? "यह फसल कहाँ उग रही है?" : "Where is this crop growing?"}</h2>
             <div className="form-grid">
               <label>
-                Field name
+                {language === "hi" ? "फ़ील्ड नाम" : "Field name"}
                 <input
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  placeholder={existingField?.name || "North field"}
+                  placeholder={existingField?.name || (language === "hi" ? "उत्तर खेत" : "North field")}
                   required={!existingField}
                 />
               </label>
               <label>
-                Crop
+                {language === "hi" ? "फसल" : "Crop"}
                 <select
                   value={form.crop}
                   onChange={(e) => setForm({ ...form, crop: e.target.value })}
@@ -675,7 +939,7 @@ function ReportForm({ fields, onDone, onError }) {
                 </select>
               </label>
               <label>
-                Sowing date
+                {language === "hi" ? "बुवाई की तिथि" : "Sowing date"}
                 <input
                   type="date"
                   value={form.sowingDate}
@@ -685,30 +949,29 @@ function ReportForm({ fields, onDone, onError }) {
                 />
               </label>
               <label>
-                Crop stage
+                {language === "hi" ? "फसल अवस्था" : "Crop stage"}
                 <select
                   value={form.stage}
                   onChange={(e) => setForm({ ...form, stage: e.target.value })}
                 >
-                  <option value="seedling">Seedling</option>
-                  <option value="vegetative">Vegetative</option>
-                  <option value="flowering">Flowering</option>
-                  <option value="fruiting">Fruiting</option>
+                  <option value="seedling">{language === "hi" ? "नर्सरी" : "Seedling"}</option>
+                  <option value="vegetative">{language === "hi" ? "वनस्पति" : "Vegetative"}</option>
+                  <option value="flowering">{language === "hi" ? "फूलना" : "Flowering"}</option>
+                  <option value="fruiting">{language === "hi" ? "फलना" : "Fruiting"}</option>
                 </select>
               </label>
             </div>
             <label className="location-input">
-              Location{" "}
+              {language === "hi" ? "स्थान" : "Location"}{" "}
               <button
                 type="button"
                 className="outline small-button"
                 onClick={locate}
               >
-                <LocateFixed size={15} /> Use my GPS
+                <LocateFixed size={15} /> {language === "hi" ? "मेरा जीपीएस उपयोग करें" : "Use my GPS"}
               </button>
               <span>
-                {Number(form.latitude).toFixed(3)},{" "}
-                {Number(form.longitude).toFixed(3)}
+                {Number(form.latitude).toFixed(3)}, {Number(form.longitude).toFixed(3)}
               </span>
             </label>
           </div>
@@ -716,23 +979,22 @@ function ReportForm({ fields, onDone, onError }) {
         <section className="panel step">
           <div className="step-number">02</div>
           <div className="step-body">
-            <p className="eyebrow">CROP IMAGE</p>
-            <h2>Show us the leaves or fruit.</h2>
+            <p className="eyebrow">{language === "hi" ? "फसल चित्र" : "CROP IMAGE"}</p>
+            <h2>{language === "hi" ? "हमें पत्तियों या फलों दिखाएँ।" : "Show us the leaves or fruit."}</h2>
             <label className="dropzone">
               {file ? (
                 <>
                   <CheckCircle2 size={28} />
                   <strong>{file.name}</strong>
                   <small>
-                    {(file.size / 1024 / 1024).toFixed(1)} MB · ready for
-                    quality check
+                    {(file.size / 1024 / 1024).toFixed(1)} MB · {language === "hi" ? "गुणवत्ता जांच के लिए तैयार" : "ready for quality check"}
                   </small>
                 </>
               ) : (
                 <>
                   <Upload size={28} />
-                  <strong>Choose a clear crop image</strong>
-                  <small>JPG, PNG or WebP · up to 8 MB · minimum 224px</small>
+                  <strong>{language === "hi" ? "स्पष्ट फसल फोटो चुनें" : "Choose a clear crop image"}</strong>
+                  <small>{language === "hi" ? "JPG, PNG या WebP · अधिकतम 8 MB · न्यूनतम 224px" : "JPG, PNG or WebP · up to 8 MB · minimum 224px"}</small>
                 </>
               )}
               <input
@@ -743,13 +1005,12 @@ function ReportForm({ fields, onDone, onError }) {
               />
             </label>
             <p className="demo-note">
-              The current AI result is clearly labelled as a development model.
-              It is an interface-ready adapter for a trained model.
+              {language === "hi" ? t.demoNote : "The current AI result is clearly labelled as a development model. It is an interface-ready adapter for a trained model."}
             </p>
           </div>
         </section>
         <button className="primary full" disabled={busy || !file}>
-          {busy ? "Checking field signals..." : "Run crop health check"}{" "}
+          {busy ? (language === "hi" ? "फ़ील्ड संकेत जाँच रहे हैं..." : "Checking field signals...") : (language === "hi" ? "फसल स्वास्थ्य जांचें" : "Run crop health check")}{" "}
           {!busy && <ArrowRight size={18} />}
         </button>
       </form>
@@ -757,14 +1018,14 @@ function ReportForm({ fields, onDone, onError }) {
   );
 }
 
-function History({ reports, setSelected, setPage }) {
+function History({ reports, setSelected, setPage, language }) {
   return (
     <div className="content">
       <div className="page-heading">
         <div>
-          <p className="eyebrow">REPORT HISTORY</p>
-          <h1>Every check, in one place.</h1>
-          <p className="muted">Track how your fields change over time.</p>
+          <p className="eyebrow">{language === "hi" ? "रिपोर्ट इतिहास" : "REPORT HISTORY"}</p>
+          <h1>{language === "hi" ? "हर जांच एक ही जगह।" : "Every check, in one place."}</h1>
+          <p className="muted">{language === "hi" ? "समय के साथ आपके खेत कैसे बदलते हैं, इसे ट्रैक करें।" : "Track how your fields change over time."}</p>
         </div>
       </div>
       <div className="panel history-list">
@@ -780,14 +1041,15 @@ function History({ reports, setSelected, setPage }) {
             />
           ))
         ) : (
-          <Empty onClick={() => setPage("report")} />
+          <Empty onClick={() => setPage("report")} language={language} />
         )}
       </div>
     </div>
   );
 }
 
-function ReportDetail({ report: initial, onError }) {
+function ReportDetail({ report: initial, onError, language }) {
+  const t = LANG[language] || LANG.en;
   const [report, setReport] = useState(initial);
   const [note, setNote] = useState("");
   const [ipm, setIpm] = useState(null);
@@ -834,13 +1096,10 @@ function ReportDetail({ report: initial, onError }) {
     <div className="content">
       <div className="page-heading">
         <div>
-          <p className="eyebrow">CROP HEALTH REPORT</p>
-          <h1>{report.crop} health check</h1>
+          <p className="eyebrow">{language === "hi" ? "फसल स्वास्थ्य रिपोर्ट" : "CROP HEALTH REPORT"}</p>
+          <h1>{report.crop} {language === "hi" ? "स्वास्थ्य जांच" : "health check"}</h1>
           <p className="muted">
-            {new Date(report.createdAt).toLocaleString()} ·{" "}
-            {report.prediction.model_type?.includes("DEMO")
-              ? "Development AI model"
-              : "AI model"}
+            {new Date(report.createdAt).toLocaleString()} · {report.prediction.model_type?.includes("DEMO") ? (language === "hi" ? "विकास एआई मॉडल" : "Development AI model") : (language === "hi" ? "एआई मॉडल" : "AI model")}
           </p>
         </div>
         <RiskBadge level={report.risk.level} />
@@ -848,17 +1107,17 @@ function ReportDetail({ report: initial, onError }) {
       {report.status === "expert_review" && (
         <div className="review-banner">
           <ShieldCheck size={19} />
-          <div><strong>Expert validation recommended</strong><span>AI confidence is below the review threshold. A qualified expert should confirm this possible problem.</span></div>
+          <div><strong>{language === "hi" ? "विशेषज्ञ सत्यापन की सिफारिश" : "Expert validation recommended"}</strong><span>{language === "hi" ? "एआई विश्वास समीक्षा सीमा से नीचे है। एक योग्य विशेषज्ञ को इस संभावित समस्या की पुष्टि करनी चाहिए।" : "AI confidence is below the review threshold. A qualified expert should confirm this possible problem."}</span></div>
         </div>
       )}
       <div className="detail-grid">
         <div className="panel result-hero">
           <img src={report.imageUrl} alt={`${report.crop} crop`} />
           <div>
-            <p className="eyebrow">POSSIBLE PROBLEM</p>
+            <p className="eyebrow">{language === "hi" ? "संभव समस्या" : "POSSIBLE PROBLEM"}</p>
             <h2>{report.prediction.prediction}</h2>
             <div className="confidence">
-              <span>AI confidence</span>
+              <span>{language === "hi" ? "एआई विश्वास" : "AI confidence"}</span>
               <strong>{Math.round(report.prediction.confidence * 100)}%</strong>
               <div>
                 <i
@@ -868,27 +1127,26 @@ function ReportDetail({ report: initial, onError }) {
             </div>
             {report.prediction.top_predictions?.length > 1 && (
               <p className="alternate-signals">
-                Other possible signal: <strong>{report.prediction.top_predictions[1].label}</strong> ({Math.round(report.prediction.top_predictions[1].confidence * 100)}%)
+                {language === "hi" ? "अन्य संभावित संकेत:" : "Other possible signal:"} <strong>{report.prediction.top_predictions[1].label}</strong> ({Math.round(report.prediction.top_predictions[1].confidence * 100)}%)
               </p>
             )}
             <p className="demo-note">
-              POSSIBLE PROBLEM · AI can make mistakes. This is an assistive
-              signal, not a final diagnosis.
+              {language === "hi" ? "संभव समस्या · एआई गलतियाँ कर सकता है। यह सहायक संकेत है, अंतिम निदान नहीं है।" : "POSSIBLE PROBLEM · AI can make mistakes. This is an assistive signal, not a final diagnosis."}
             </p>
-            <p className="stage-note"><strong>Farmer-selected stage:</strong> {report.stage}</p>
+            <p className="stage-note"><strong>{language === "hi" ? "किसान द्वारा चुनी गई अवस्था:" : "Farmer-selected stage:"}</strong> {report.stage}</p>
             {report.prediction.visual_signals && (
               <div className="visual-signals">
-                <span>Leaf area {signalPercent(visualSignals.leaf_area)}%</span>
-                <span>Brown/orange {signalPercent(visualSignals.brown_orange)}%</span>
-                <span>Yellowing {signalPercent(visualSignals.yellowing)}%</span>
+                <span>{language === "hi" ? "पत्ती क्षेत्र" : "Leaf area"} {signalPercent(visualSignals.leaf_area)}%</span>
+                <span>{language === "hi" ? "भूरा/नारंगी" : "Brown/orange"} {signalPercent(visualSignals.brown_orange)}%</span>
+                <span>{language === "hi" ? "पीलापन" : "Yellowing"} {signalPercent(visualSignals.yellowing)}%</span>
               </div>
             )}
           </div>
         </div>
         <div className="panel">
-          <p className="eyebrow">RISK ASSESSMENT</p>
-          <h2>Risk level: <RiskBadge level={report.risk.level} /></h2>
-          <p className="risk-question">Why is the risk {report.risk.level.toLowerCase()}?</p>
+          <p className="eyebrow">{language === "hi" ? "जोखिम मूल्यांकन" : "RISK ASSESSMENT"}</p>
+          <h2>{language === "hi" ? "जोखिम स्तर:" : "Risk level:"} <RiskBadge level={report.risk.level} /></h2>
+          <p className="risk-question">{language === "hi" ? "जोखिम क्यों" : "Why is the risk"} {report.risk.level.toLowerCase()}?</p>
           <ul className="reason-list">
             {report.risk.reasons.map((reason) => (
               <li key={reason}>{reason}</li>
@@ -897,15 +1155,15 @@ function ReportDetail({ report: initial, onError }) {
           <div className="weather">
             <div>
               <CloudRain size={18} />
-              <span>Weather</span>
+              <span>{language === "hi" ? "मौसम" : "Weather"}</span>
             </div>
             {report.weather.available ? (
               <strong>
                 {report.weather.temperature}°C · {report.weather.humidity}%
-                humidity
+                {language === "hi" ? " आर्द्रता" : " humidity"}
               </strong>
             ) : (
-              <strong>Weather unavailable</strong>
+              <strong>{language === "hi" ? "मौसम उपलब्ध नहीं" : "Weather unavailable"}</strong>
             )}
             {report.weather.available && report.weather.forecast?.length > 0 && (
               <div className="weather-forecast">
@@ -921,54 +1179,51 @@ function ReportDetail({ report: initial, onError }) {
       </div>
       <div className="detail-grid">
         <div className="panel">
-          <p className="eyebrow">IPM ADVISORY</p>
+          <p className="eyebrow">{language === "hi" ? "IPM सलाह" : "IPM ADVISORY"}</p>
           <h2>{ipm?.problem || report.prediction.prediction}</h2>
           {ipm ? (
             <div className="ipm-guidance">
-              <p><strong>Symptoms:</strong> {ipm.symptoms}</p>
-              <p><strong>Monitor:</strong> {ipm.monitoring}</p>
-              <p><strong>Cultural:</strong> {ipm.culturalControl}</p>
-              <p><strong>Biological:</strong> {ipm.biologicalControl}</p>
-              <p><strong>Mechanical:</strong> {ipm.mechanicalControl}</p>
-              <p><strong>Chemical:</strong> {ipm.chemicalControl}</p>
-              <small>Source: <a href={ipm.sourceUrl} target="_blank" rel="noreferrer">{ipm.source}</a> · Verified {ipm.lastVerified}</small>
+              <p><strong>{language === "hi" ? "लक्षण:" : "Symptoms:"}</strong> {ipm.symptoms}</p>
+              <p><strong>{language === "hi" ? "निगरानी:" : "Monitor:"}</strong> {ipm.monitoring}</p>
+              <p><strong>{language === "hi" ? "सांस्कृतिक:" : "Cultural:"}</strong> {ipm.culturalControl}</p>
+              <p><strong>{language === "hi" ? "जैविक:" : "Biological:"}</strong> {ipm.biologicalControl}</p>
+              <p><strong>{language === "hi" ? "यांत्रिक:" : "Mechanical:"}</strong> {ipm.mechanicalControl}</p>
+              <p><strong>{language === "hi" ? "रासायनिक:" : "Chemical:"}</strong> {ipm.chemicalControl}</p>
+              <small>{language === "hi" ? "स्रोत:" : "Source:"} <a href={ipm.sourceUrl} target="_blank" rel="noreferrer">{ipm.source}</a> · {language === "hi" ? "सत्यापित" : "Verified"} {ipm.lastVerified}</small>
             </div>
-          ) : <p className="muted">Loading structured advisory...</p>}
+          ) : <p className="muted">{language === "hi" ? "संरचित सलाह लोड हो रही है..." : "Loading structured advisory..."}</p>}
           <div className="recommended-action">
-            <p className="eyebrow">RECOMMENDED ACTION</p>
-            <strong>{ipm ? "Use verified IPM guidance" : "Wait for advisory guidance"}</strong>
+            <p className="eyebrow">{language === "hi" ? "सिफारिश की गई कार्रवाई" : "RECOMMENDED ACTION"}</p>
+            <strong>{ipm ? (language === "hi" ? "सत्यापित IPM मार्गदर्शन का उपयोग करें" : "Use verified IPM guidance") : (language === "hi" ? "सलाह मार्गदर्शन का इंतजार करें" : "Wait for advisory guidance")}</strong>
           </div>
           <div className="advisory-pills">
-            <span>Monitor regularly</span>
-            <span>Improve airflow</span>
-            <span>Ask an expert before chemicals</span>
+            <span>{language === "hi" ? "नियमित रूप से निगरानी करें" : "Monitor regularly"}</span>
+            <span>{language === "hi" ? "हवा का प्रवाह बेहतर करें" : "Improve airflow"}</span>
+            <span>{language === "hi" ? "रसायनों से पहले विशेषज्ञ से सलाह लें" : "Ask an expert before chemicals"}</span>
           </div>
           <button className="outline" onClick={requestReview}>
-            <ShieldCheck size={17} />{" "}
-            {report.status === "expert_review"
-              ? "Expert review requested"
-              : "Request expert review"}
+            <ShieldCheck size={17} /> {report.status === "expert_review" ? (language === "hi" ? "विशेषज्ञ समीक्षा अनुरोधित" : "Expert review requested") : (language === "hi" ? "विशेषज्ञ समीक्षा का अनुरोध करें" : "Request expert review")}
           </button>
           <div className="expert-status">
-            <p className="eyebrow">EXPERT VALIDATION</p>
+            <p className="eyebrow">{language === "hi" ? "विशेषज्ञ सत्यापन" : "EXPERT VALIDATION"}</p>
             <strong className={report.status === "validated" ? "validated" : "pending"}>
-              {report.status === "validated" ? "● Validated" : "● Pending review"}
+              {report.status === "validated" ? (language === "hi" ? "● सत्यापित" : "● Validated") : (language === "hi" ? "● लंबित समीक्षा" : "● Pending review")}
             </strong>
           </div>
         </div>
         <div className="panel">
-          <p className="eyebrow">FOLLOW-UP</p>
-          <h2>How is the crop now?</h2>
+          <p className="eyebrow">{language === "hi" ? "फॉलो-अप" : "FOLLOW-UP"}</p>
+          <h2>{language === "hi" ? "फसल अब कैसी है?" : "How is the crop now?"}</h2>
           <textarea
             value={note}
             onChange={(e) => setNote(e.target.value)}
-            placeholder="Add an observation for your next check..."
+            placeholder={language === "hi" ? "अगली जांच के लिए एक अवलोकन जोड़ें..." : "Add an observation for your next check..."}
           />
           <button className="primary" disabled={!note} onClick={submitFollowUp}>
-            Save follow-up <CheckCircle2 size={17} />
+            {language === "hi" ? "फॉलो-अप सेव करें" : "Save follow-up"} <CheckCircle2 size={17} />
           </button>
           {report.followUp && (
-            <p className="saved-note">Saved: {report.followUp.note}</p>
+            <p className="saved-note">{language === "hi" ? "सेव किया गया:" : "Saved:"} {report.followUp.note}</p>
           )}
         </div>
       </div>
@@ -976,7 +1231,8 @@ function ReportDetail({ report: initial, onError }) {
   );
 }
 
-function ExpertView({ onError }) {
+function ExpertView({ onError, language }) {
+  const t = LANG[language] || LANG.en;
   const [cases, setCases] = useState([]);
   const [active, setActive] = useState(null);
   const load = async () => {
@@ -993,17 +1249,16 @@ function ExpertView({ onError }) {
     return (
       <div className="content">
         <button className="text-button" onClick={() => setActive(null)}>
-          ← Back to queue
+          ← {language === "hi" ? "कतार पर वापस" : "Back to queue"}
         </button>
         <div className="page-heading">
           <div>
-            <p className="eyebrow">CASE REVIEW</p>
+            <p className="eyebrow">{language === "hi" ? "मामला समीक्षा" : "CASE REVIEW"}</p>
             <h1>
               {active.report.crop} · {active.report.prediction.prediction}
             </h1>
             <p className="muted">
-              {active.report.stage} stage · {active.report.latitude.toFixed(3)},{" "}
-              {active.report.longitude.toFixed(3)}
+              {active.report.stage} {language === "hi" ? "अवस्था" : "stage"} · {active.report.latitude.toFixed(3)}, {active.report.longitude.toFixed(3)}
             </p>
           </div>
           <RiskBadge level={active.report.risk.level} />
@@ -1012,12 +1267,10 @@ function ExpertView({ onError }) {
           <div className="panel result-hero">
             <img src={active.report.imageUrl} alt="Farmer crop submission" />
             <div>
-              <p className="eyebrow">AI SIGNAL</p>
+              <p className="eyebrow">{language === "hi" ? "एआई संकेत" : "AI SIGNAL"}</p>
               <h2>{active.report.prediction.prediction}</h2>
               <p className="muted">
-                Confidence:{" "}
-                {Math.round(active.report.prediction.confidence * 100)}% ·{" "}
-                {active.report.prediction.model_type}
+                {language === "hi" ? "विश्वास:" : "Confidence:"} {Math.round(active.report.prediction.confidence * 100)}% · {active.report.prediction.model_type}
               </p>
             </div>
           </div>
@@ -1028,6 +1281,7 @@ function ExpertView({ onError }) {
               load();
             }}
             onError={onError}
+            language={language}
           />
         </div>
       </div>
@@ -1036,21 +1290,21 @@ function ExpertView({ onError }) {
     <div className="content">
       <div className="page-heading">
         <div>
-          <p className="eyebrow">EXPERT WORKSPACE</p>
-          <h1>Cases needing your eye.</h1>
+          <p className="eyebrow">{language === "hi" ? "विशेषज्ञ कार्यक्षेत्र" : "EXPERT WORKSPACE"}</p>
+          <h1>{language === "hi" ? "ऐसे मामले जिनमें आपकी आँख की ज़रूरत है।" : "Cases needing your eye."}</h1>
           <p className="muted">
-            Review lower-confidence signals and give farmers a validated answer.
+            {language === "hi" ? "कम विश्वास वाले संकेतों की समीक्षा करें और किसानों को सत्यापित उत्तर दें।" : "Review lower-confidence signals and give farmers a validated answer."}
           </p>
         </div>
       </div>
       <div className="stats-grid">
         <Stat
-          label="Pending cases"
+          label={language === "hi" ? "लंबित मामले" : "Pending cases"}
           value={cases.length}
           icon={ShieldCheck}
           alert
         />
-        <Stat label="Model signals" value="Assistive" icon={Activity} />
+        <Stat label={language === "hi" ? "मॉडल संकेत" : "Model signals"} value={language === "hi" ? "सहायक" : "Assistive"} icon={Activity} />
       </div>
       <div className="panel case-list">
         {cases.length ? (
@@ -1070,20 +1324,20 @@ function ExpertView({ onError }) {
                 </strong>
                 <small>
                   {Math.round(item.report.prediction.confidence * 100)}%
-                  confidence · {item.report.risk.level} risk
+                  {language === "hi" ? " विश्वास · " : " confidence · "}{item.report.risk.level} {language === "hi" ? "जोखिम" : "risk"}
                 </small>
               </span>
               <ArrowRight size={17} />
             </button>
           ))
         ) : (
-          <Empty onClick={load} />
+          <Empty onClick={load} language={language} />
         )}
       </div>
     </div>
   );
 }
-function ValidationForm({ caseItem, onDone, onError }) {
+function ValidationForm({ caseItem, onDone, onError, language }) {
   const [prediction, setPrediction] = useState(
     caseItem.report.prediction.prediction,
   );
@@ -1107,10 +1361,10 @@ function ValidationForm({ caseItem, onDone, onError }) {
   };
   return (
     <form className="panel validation" onSubmit={submit}>
-      <p className="eyebrow">EXPERT VALIDATION</p>
-      <h2>What do you see?</h2>
+      <p className="eyebrow">{language === "hi" ? "विशेषज्ञ सत्यापन" : "EXPERT VALIDATION"}</p>
+      <h2>{language === "hi" ? "आप क्या देखते हैं?" : "What do you see?"}</h2>
       <label>
-        Validated problem
+        {language === "hi" ? "सत्यापित समस्या" : "Validated problem"}
         <select
           value={prediction}
           onChange={(e) => setPrediction(e.target.value)}
@@ -1119,22 +1373,23 @@ function ValidationForm({ caseItem, onDone, onError }) {
         </select>
       </label>
       <label>
-        Remarks
+        {language === "hi" ? "टिप्पणियाँ" : "Remarks"}
         <textarea
           required
           value={remarks}
           onChange={(e) => setRemarks(e.target.value)}
-          placeholder="Explain the field signal in simple terms..."
+          placeholder={language === "hi" ? "फ़ील्ड संकेत को सरल भाषा में समझाइए..." : "Explain the field signal in simple terms..."}
         />
       </label>
       <button className="primary full">
-        Mark validated <CheckCircle2 size={17} />
+        {language === "hi" ? "सत्यापित करें" : "Mark validated"} <CheckCircle2 size={17} />
       </button>
     </form>
   );
 }
 
-function OfficerView({ page, onError }) {
+function OfficerView({ page, onError, language }) {
+  const t = LANG[language] || LANG.en;
   const [data, setData] = useState(null);
   useEffect(() => {
     fetchJson("/dashboard/officer")
@@ -1144,31 +1399,30 @@ function OfficerView({ page, onError }) {
   if (!data)
     return (
       <div className="content">
-        <div className="loading">Loading command center...</div>
+        <div className="loading">{language === "hi" ? "कमांड सेंटर लोड हो रहा है..." : "Loading command center..."}</div>
       </div>
     );
   return (
     <div className="content">
       <div className="page-heading">
         <div>
-          <p className="eyebrow">OFFICER COMMAND CENTER</p>
-          <h1>See the bigger picture.</h1>
+          <p className="eyebrow">{language === "hi" ? "अधिकारी कमांड सेंटर" : "OFFICER COMMAND CENTER"}</p>
+          <h1>{language === "hi" ? "बड़ी तस्वीर देखें।" : "See the bigger picture."}</h1>
           <p className="muted">
-            Aggregated signals from farmer reports. Potential hotspots are not
-            automatic government action.
+            {language === "hi" ? "किसानों की रिपोर्टों से एकत्रित संकेत। संभावित हॉटस्पॉट स्वचालित सरकारी कार्रवाई नहीं हैं।" : "Aggregated signals from farmer reports. Potential hotspots are not automatic government action."}
           </p>
         </div>
       </div>
       <div className="stats-grid">
-        <Stat label="Total reports" value={data.totalReports} icon={Activity} />
+        <Stat label={language === "hi" ? "कुल रिपोर्टें" : "Total reports"} value={data.totalReports} icon={Activity} />
         <Stat
-          label="High-risk reports"
+          label={language === "hi" ? "उच्च जोखिम रिपोर्टें" : "High-risk reports"}
           value={data.highRisk}
           icon={CloudRain}
           alert
         />
         <Stat
-          label="Potential hotspots"
+          label={language === "hi" ? "संभावित हॉटस्पॉट" : "Potential hotspots"}
           value={data.hotspots.length}
           icon={MapPin}
         />
@@ -1177,8 +1431,8 @@ function OfficerView({ page, onError }) {
         <div className="panel wide">
           <div className="panel-head">
             <div>
-              <p className="eyebrow">REPORT DISTRIBUTION</p>
-              <h2>Problems observed</h2>
+              <p className="eyebrow">{language === "hi" ? "रिपोर्ट वितरण" : "REPORT DISTRIBUTION"}</p>
+              <h2>{language === "hi" ? "देखी गई समस्याएँ" : "Problems observed"}</h2>
             </div>
           </div>
           {Object.entries(data.problemCounts).map(([problem, count]) => (
@@ -1196,13 +1450,13 @@ function OfficerView({ page, onError }) {
           ))}
         </div>
         <div className="panel">
-          <p className="eyebrow">RECENT REPORTS</p>
+          <p className="eyebrow">{language === "hi" ? "हाल की रिपोर्टें" : "RECENT REPORTS"}</p>
           {data.recentReports.slice(0, 5).map((report) => (
             <div className="mini-report" key={report.id}>
               <span className={`dot dot-${report.risk.level.toLowerCase()}`} />
               <span>
                 {report.crop} · {report.prediction.prediction}
-                <small>{report.risk.level} risk</small>
+                <small>{report.risk.level} {language === "hi" ? "जोखिम" : "risk"}</small>
               </span>
             </div>
           ))}
@@ -1210,8 +1464,8 @@ function OfficerView({ page, onError }) {
       </div>
       {page === "map" && (
         <div className="panel map-panel">
-          <p className="eyebrow">LOCATION VIEW</p>
-          <h2>Potential hotspots</h2>
+          <p className="eyebrow">{language === "hi" ? "स्थान दृश्य" : "LOCATION VIEW"}</p>
+          <h2>{language === "hi" ? "संभावित हॉटस्पॉट" : "Potential hotspots"}</h2>
           <MapContainer
             center={[20.5937, 78.9629]}
             zoom={5}
@@ -1224,7 +1478,7 @@ function OfficerView({ page, onError }) {
             {data.hotspots.map((point, index) => (
               <Marker key={index} position={[point.latitude, point.longitude]}>
                 <Popup>
-                  {point.crop} · {point.risk} risk
+                  {point.crop} · {point.risk} {language === "hi" ? "जोखिम" : "risk"}
                 </Popup>
               </Marker>
             ))}
